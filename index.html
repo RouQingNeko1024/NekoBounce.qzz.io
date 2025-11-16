@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NekoBounce - 完全免费开源客户端</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            overflow-x: hidden;
+            padding: 2rem;
+        }
+        
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: url('wallpaper.webp') no-repeat center center;
+            background-size: cover;
+            filter: brightness(0.7);
+        }
+        
+        .content {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 8vh;
+            animation: fadeIn 1.5s ease-out;
+            max-width: 1000px;
+            width: 100%;
+        }
+        
+        h1 {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            letter-spacing: 3px;
+            color: white;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 4rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+            line-height: 1.5;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 50px;
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 4rem;
+        }
+        
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(31, 38, 135, 0.5);
+            background: rgba(255, 255, 255, 0.25);
+        }
+        
+        .download-btn:hover::before {
+            left: 100%;
+        }
+        
+        .download-btn:active {
+            transform: translateY(-2px);
+        }
+        
+        .demo-image {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .demo-image:hover {
+            transform: scale(1.02);
+        }
+        
+        footer {
+            width: 100%;
+            padding: 1.5rem;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            font-size: 1rem;
+            border-radius: 15px;
+            max-width: 1000px;
+            margin-top: 2rem;
+        }
+        
+        .loading-info {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 电脑端优化 */
+        @media (min-width: 1024px) {
+            .content {
+                margin-top: 12vh;
+            }
+            
+            h1 {
+                font-size: 6rem;
+            }
+            
+            .subtitle {
+                font-size: 2rem;
+            }
+            
+            .download-btn {
+                padding: 1.5rem 4rem;
+                font-size: 1.6rem;
+            }
+            
+            .demo-image {
+                max-width: 900px;
+            }
+        }
+        
+        /* 平板端 */
+        @media (max-width: 1023px) and (min-width: 768px) {
+            h1 {
+                font-size: 4rem;
+            }
+            
+            .subtitle {
+                font-size: 1.6rem;
+            }
+            
+            .download-btn {
+                padding: 1.2rem 3rem;
+                font-size: 1.4rem;
+            }
+            
+            .demo-image {
+                max-width: 700px;
+            }
+        }
+        
+        /* 手机端 */
+        @media (max-width: 767px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .download-btn {
+                padding: 1rem 2.5rem;
+                font-size: 1.2rem;
+            }
+            
+            .content {
+                margin-top: 5vh;
+                padding: 1rem;
+            }
+            
+            body {
+                padding: 1rem;
+            }
+            
+            .demo-image {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    
+    <div class="content">
+        <h1>NekoBounce</h1>
+        <p class="subtitle">完全免费开源客户端</p>
+        <a href="https://github.com/beimen-pan" class="download-btn">下载</a>
+        
+        <img src="a1.webp" alt="NekoBounce=" class="demo-image">
+    </div>
+    
+    <footer>
+        <div>Copyright © 2025 NekoBounce</div>
+        <div id="TimeShow" class="loading-info"></div>
+    </footer>
+
+    <script>
+
+        const t1 = new Date().getTime();
+        
+
+        window.onload = function() {
+            const loadTime = new Date().getTime() - t1;
+            document.getElementById("TimeShow").innerHTML = "加载本页耗时 " + loadTime + " 毫秒";
+        };
+    </script>
+</body>
+</html>
